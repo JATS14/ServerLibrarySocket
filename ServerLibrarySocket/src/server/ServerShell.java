@@ -6,6 +6,7 @@ import BaseDatos.Imagen;
 
 public class ServerShell{
 
+	public static Scanner scan = new Scanner(System.in);
 	private static String todo = "";
 	private static String imagen = "";
 	
@@ -29,31 +30,58 @@ public class ServerShell{
 		Libreria.obtenerLibreria().cerrarBD();
 	}
 	
-	public static void run() {
-		Scanner scan = new Scanner(System.in);
+	public static void run() throws IOException {
+		try {
 		System.out.println("---------------BD Shell------------");
 		String str = scan.nextLine();
-		if (str.equals("FIND")) {
-			System.out.println("FIND");
-			
+		String[] comand = str.split(" ");
+		if (comand[0].equals("SELECT")) {
+				String findTodo = scan.nextLine();
+				String[] donde = findTodo.split(" ");
+				String where = scan.nextLine();
+				String[] condi = where.split(" ");
+				System.out.println("Buscando en Colecion: " + donde[1] + ", Condicion: " + condi[1]);
+				if(comand[1].equals("*")){
+					if (condi[1].equals("*")) {
+						verTodo();
+						System.out.println(todo);
+					}else {
+						obtenerImagen(condi[1]);
+						System.out.println(imagen);
+					}	
+				}if(comand[1].equals("NOMBRE")){
+						obtenerImagen(condi[1]);
+						Imagen img = Libreria.obtenerLibreria().deserializarImagen(imagen);
+						System.out.println(img.getNombre());
+				}if(comand[1].equals("DESCRIPCION")){
+						obtenerImagen(condi[1]);
+						Imagen img = Libreria.obtenerLibreria().deserializarImagen(imagen);
+						System.out.println(img.getDescripcion());
+				}if(comand[1].equals("AUTOR")){
+					obtenerImagen(condi[1]);
+					Imagen img = Libreria.obtenerLibreria().deserializarImagen(imagen);
+					System.out.println(img.getAutor());
+				}
 		}if (str.equals("INSERT INTO")) {
 			System.out.println("INSERT");
 			
-		}if (str.equals("DELETE")) {
+		}if (comand[0].equals("DELETE")) {
 			System.out.println("DELETE");
 			
-		}if (str.equals("UPDATE")) {
+		}if (comand[0].equals("UPDATE")) {
 			System.out.println("UPDATE");
 			
-		}if (str.equals("CLOSE")) {
+		}if (comand[0].equals("CLOSE")) {
 			System.out.println("CLOSE");
 		
 		}
-		scan.close();
+		}catch(IOException e) {
+			
+		}
 		run();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		run();
 	}
 }

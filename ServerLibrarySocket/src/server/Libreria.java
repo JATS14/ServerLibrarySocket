@@ -23,6 +23,7 @@ public class Libreria {
 		return director.serializador(list);
 	}
 	public String obtenerImagen(String id) {
+		id = "\""+id+"\"";
 		Imagen img = director.obtenerImagen(id);
 		img.setDatos(raid.getDato(id));
 		return serializarImagen(img);

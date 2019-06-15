@@ -38,7 +38,7 @@ public class BDDirector {
 	}
 	
 	public void renovarImagen(String id, Imagen img) {
-		Imagen buscar = coleccion.buscar("id", id);
+		Imagen buscar = coleccion.buscar("id",id);
 		coleccion.actualizar(buscar, img);
 	}
 	
@@ -107,8 +107,8 @@ public class BDDirector {
 			String[] parte = h.split(" ");
 			if(cont == 1){id = parte[1];}
 			if(cont == 2){nom = parte[1];}
-			if(cont == 3){autor = parte[1];}
-			if(cont == 4){ano = parte[1];}
+			if(cont == 3){ano = parte[1];}
+			if(cont == 4){autor = parte[1];}
 			if(cont == 5){pe = parte[1];}
 			if(cont == 6){des = parte[1];}
 			if(cont == 7){dato = parte[1];}
