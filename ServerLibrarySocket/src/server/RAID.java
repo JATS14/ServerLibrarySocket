@@ -19,7 +19,7 @@ public class RAID {
 	}
 	
 	public void setDato(String id,String dato){
-		String enviar = id + ","+ dato;
+		String enviar = id + "-"+ dato;
 		try {setDatoRAID(enviar);}
 		catch(IOException  e){}
 		return;
